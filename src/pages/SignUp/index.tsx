@@ -56,16 +56,19 @@ const SignUp: React.FC = () => {
                 formRef.current?.setErrors(errors);
             } else {
                 console.log(err);
+                return;
             }
-            return;
+
+            addToast({
+                type: "error",
+                title: "erro na autenticação",
+                description: "ocorreu um erro ao logar",
+            });
         }
 
-        addToast({
-            type: "error",
-            title: "erro na autenticação",
-            description: "ocorreu um erro ao logar",
-        });
-    },
+        },
+
+
         [addToast, history]
     );
 

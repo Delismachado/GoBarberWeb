@@ -55,8 +55,10 @@ const SignIn: React.FC = () => {
                     formRef.current?.setErrors(errors);
                 } else {
                     console.log(err);
+
+                    return;
                 }
-                return;
+
 
                 addToast({
                     type: "error",
