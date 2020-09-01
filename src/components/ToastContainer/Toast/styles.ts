@@ -4,7 +4,7 @@ import { animated } from "react-spring";
 
 interface ContainertProps {
     type?: "success" | "error" | "info";
-    hasDescription: boolean;
+    hasDescription: number;
 }
 
 const toastTypeValidations = {
