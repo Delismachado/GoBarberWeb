@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useEffect, useMemo } from "react";
+import {Link} from 'react-router-dom';
 import { isToday, format, parseISO, isAfter } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 import DayPicker, { DayModifiers } from 'react-day-picker';
@@ -151,11 +152,13 @@ const Dashboard: React.FC = () => {
 
                     <Profile>
                         <img
-                            src="https://avatars1.githubusercontent.com/u/40635425?s=460&u=d4dc8d6b154d58d1dc4e832894e93418eb10a02b&v=4" alt={user.name} />
+                            src={user.avatar_url} alt={user.name} />
 
                         <div>
                             <span>Bem vindo!</span>
-                            <strong>{user.name}</strong>
+                            <Link to="/profile">
+                                <strong>{user.name}</strong>
+                            </Link>
                         </div>
                     </Profile>
 
