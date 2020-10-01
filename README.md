@@ -15,6 +15,4 @@ Temos : Routes, Validação de Cadastro e Login, Unform, criação e exibição 
 
 ### Images
 
-<video width="320" height="240" controls>
-  <source src="Gobarber.mp4" type="video/mp4">
-</video>
+![GoBarberWeb](Gobarber.gif)
