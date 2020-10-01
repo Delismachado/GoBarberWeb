@@ -1,0 +1,20 @@
+## GoBarberWeb
+# Aplicação desenvolvida durante o curso GoStack da <link>Rocketseat<link>
+
+<p> Aplicação usando os princípios de SOLID e TDD!!
+Temos : Routes, Validação de Cadastro e Login, Unform, criação e exibição de tooltip, animações, Hooks, Styled Components, Components, Autenticação de Rotas, API Context, Props, Conexão com a #API - backend: usando Postgre, Mongo e Redis.<p>
+
+
+
+
+<ol>
+<li>Backend com Nodejs</li>https://github.com/Delismachado/GoBarber 🌱 GoBarberBackend.
+<li>Frontend com Reactjs</li> 🌱 GoBarberFrontend.
+<li>Mobile com ReactNative</li>https://github.com/Delismachado/GoBarberMobile 🌱 GoBarberMobile.
+</ol>
+
+### Images
+
+<video width="320" height="240" controls>
+  <source src="Gobarber.mp4" type="video/mp4">
+</video>
