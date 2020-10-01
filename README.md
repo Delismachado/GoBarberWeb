@@ -15,4 +15,4 @@ Temos : Routes, Validação de Cadastro e Login, Unform, criação e exibição 
 
 ### Images
 
-![GoBarberWeb](Gobarber.gif)
+<img src="/images/output/Gobarber.gif" width="250" height="250"/>
