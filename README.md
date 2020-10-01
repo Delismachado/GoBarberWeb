@@ -14,5 +14,5 @@ Temos : Routes, Validação de Cadastro e Login, Unform, criação e exibição 
 </ol>
 
 ### Images
-
-<img src="/images/output/Gobarber.gif" width="250" height="250"/>
+<p>Pagina de cadastro, login e agendamentos <a href="https://youtu.be/uJnq4erVItk" title="GobarberWeb">
+</a></p>
