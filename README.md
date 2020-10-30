@@ -13,6 +13,4 @@ Temos : Routes, Validação de Cadastro e Login, Unform, criação e exibição 
 <li>Mobile com ReactNative</li>https://github.com/Delismachado/GoBarberMobile 🌱 GoBarberMobile.
 </ol>
 
-### Images
-<p>Pagina de cadastro, login e agendamentos <a href="https://youtu.be/uJnq4erVItk" title="GobarberWeb">
-</a></p>
+
