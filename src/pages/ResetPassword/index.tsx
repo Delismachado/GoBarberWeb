@@ -11,7 +11,7 @@ import { useToast } from "../../hooks/toast";
 
 import getValidationErrors from "../../utils/getValidationErrors";
 
-import logoImg from "../../assets/logo.svg";
+import logoImg from "../../assets/logo.png";
 
 import Input from "../../components/Inputs";
 import Button from "../../components/Button";
