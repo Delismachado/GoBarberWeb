@@ -2,14 +2,15 @@ import styled from "styled-components";
 
 import { shade} from 'polished';
 
+
 export const Container = styled.div`
-
+    background-color: #F7E1E2;
+    height: 100vh;
 `;
-
 
 export const Header = styled.header`
     padding: 32px 0;
-    background: #28262e;
+    background: #DB8393;
 `;
 
 export const HeaderContent = styled.div`
@@ -28,7 +29,7 @@ export const HeaderContent = styled.div`
         border: 0;
 
         svg {
-            color: #999519;
+            color: #FFFFFF;
             width: 20px;
             height: 20px;
         }
@@ -53,12 +54,13 @@ export const Profile = styled.div`
         line-height: 24px;
 
         span {
-            color: #f4ede8;
+            color: #FFFFFF;
         }
 
         a {
-            color: #ff9000;
+            color: #F7E1E2;
             text-decoration: none;
+            font-size:1.2em;
 
             &:hover{
                 opacity: 0.8;
@@ -79,11 +81,12 @@ export const Schedule = styled.div`
 
     h1 {
         font-size: 36px;
+        color: #DB8393;
     }
 
     p {
         margin-top: 8px;
-        color: #ff9000;
+        color: #8E515D;
         display: flex;
         align-items: center;
         font-weight: 500;
@@ -97,7 +100,7 @@ export const Schedule = styled.div`
             content:'';
             width: 1px;
             height: 12px;
-            background: #ff9000;
+            background: #8E515D;
             margin: 0 8px;
         }
     }
@@ -105,7 +108,7 @@ export const Schedule = styled.div`
 
 export const NextAppointment = styled.div`
     margin-top: 64px;
-
+    
     > strong {
         color: #999591;
         font-size: 20px;
@@ -157,7 +160,7 @@ export const NextAppointment = styled.div`
     }
 `;
 
-export const Appoitment = styled.div`
+export const Appointment = styled.div`
     display: flex;
     align-items: center;
 
@@ -203,9 +206,8 @@ export const Appoitment = styled.div`
 
 export const Section = styled.section`
     margin-top: 48px;
-
     > strong {
-        color: #999591;
+        color: #DE9EAE;
         font-size: 20px;
         line-height: 26px;
         border-bottom: 1px solid #3e3b47;
@@ -225,7 +227,7 @@ export const Calendar = styled.aside`
 
   .DayPicker-wrapper {
     padding-bottom: 0;
-    background: #3e3b47;
+    background: #DB8393;
     border-radius: 10px;
   }
 
@@ -238,10 +240,20 @@ export const Calendar = styled.aside`
     color: #999591 !important;
   }
 
+  .DayPicker-Weekday {
+      color: #DB8393;
+  }
+
   .DayPicker-NavButton--prev {
     right: auto;
     left: 1.5em;
     margin-right: 0;
+    background-image: url(https://maniclub.nailtime.com.br/public/images/calendar-prev-white.png);
+  }
+
+  .DayPicker-NavButton--next {
+    background-image: url(https://maniclub.nailtime.com.br/public/images/calendar-next-white.png);
+
   }
 
   .DayPicker-Month {
@@ -249,14 +261,14 @@ export const Calendar = styled.aside`
     border-spacing: 8px;
     margin: 16px 0 0 0;
     padding: 16px;
-    background-color: #28262e;
+    background-color: #EBC0C8;
     border-radius: 0 0 10px 10px;
   }
 
   .DayPicker-Caption {
     margin-bottom: 1em;
     padding: 0 1em;
-    color: #f4ede8;
+    color: #ffffff;
 
     > div {
       text-align: center;
@@ -269,28 +281,31 @@ export const Calendar = styled.aside`
   }
 
   .DayPicker-Day--available:not(.DayPicker-Day--outside) {
-    background: #3e3b47;
+    background: #DE9EAE;
     border-radius: 10px;
     color: #fff;
   }
 
   .DayPicker:not(.DayPicker--interactionDisabled)
     .DayPicker-Day:not(.DayPicker-Day--disabled):not(.DayPicker-Day--selected):not(.DayPicker-Day--outside):hover {
-    background: ${shade(0.2, '#3e3b47')};
+    background: #F7E1E2; color: #DB8393};
   }
 
   .DayPicker-Day--today {
     font-weight: normal;
+    background: #DB8393 !important;
+
   }
 
   .DayPicker-Day--disabled {
-    color: #666360 !important;
+    color: #F7E1E2;
     background: transparent !important;
   }
 
   .DayPicker-Day--selected {
-    background: #ff9000 !important;
+    background: #F7E1E2 !important;
+    border: 2px solid #DB8393;
     border-radius: 10px;
-    color: #232129 !important;
+    color: #DB8393 !important;
   }
 `;

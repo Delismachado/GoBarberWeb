@@ -15,11 +15,11 @@ import {
     Schedule,
     Calendar,
     NextAppointment,
-    Appoitment,
+    Appointment,
     Section,
 } from './styles';
 
-import logoImg from '../../assets/logo.svg';
+import logoImg from '../../assets/logo-white.png';
 import { FiPower, FiClock } from "react-icons/fi";
 import { useAuth } from "../../hooks/auth";
 import api from '../../services/api';
@@ -148,7 +148,7 @@ const Dashboard: React.FC = () => {
         <Container>
             <Header>
                 <HeaderContent>
-                    <img src={logoImg} alt="GoBarber" />
+                    <img src={logoImg} alt="Maniclub" />
 
                     <Profile>
                         <img
@@ -202,7 +202,7 @@ const Dashboard: React.FC = () => {
 
                         {morningAppointments.map(appointment => (
 
-                            <Appoitment key={appointment.id}>
+                            <Appointment key={appointment.id}>
 
                                 <span>
                                     <FiClock />
@@ -215,7 +215,7 @@ const Dashboard: React.FC = () => {
                                     <strong>{appointment.user.name}</strong>
                                 </div>
 
-                            </Appoitment>
+                            </Appointment>
 
                         ))}
 
@@ -230,7 +230,7 @@ const Dashboard: React.FC = () => {
 
                         {afternoonAppointments.map(appointment => (
 
-                            <Appoitment key={appointment.id}>
+                            <Appointment key={appointment.id}>
 
                                 <span>
                                     <FiClock />
@@ -243,7 +243,7 @@ const Dashboard: React.FC = () => {
                                     <strong>{appointment.user.name}</strong>
                                 </div>
 
-                            </Appoitment>
+                            </Appointment>
 
                         ))}
                     </Section>
