@@ -1,19 +1,28 @@
 import styled from "styled-components";
 
 
-export const DashboardStyle = styled.body`
-    background: white;
-    height: 100vh;
-`;
 
 export const Container = styled.div`
     background-color: #F7E1E2;
     height: 100vh;
+
+    @media only screen and (max-width: 850px) {
+        height: min-content;
+        min-width: min-content;
+        padding: 0 0 60px 0; 
+        
+        }
 `;
 
 export const Header = styled.header`
     padding: 32px 0;
     background: #DB8393;
+
+    @media only screen and (max-width: 850px) {
+
+        padding: 10px 0; 
+        
+        }
 `;
 
 export const HeaderContent = styled.div`
@@ -25,6 +34,12 @@ export const HeaderContent = styled.div`
 
     > img {
         height: 80px;
+    }
+
+    @media only screen and (max-width: 850px) {
+
+    font-size: 0.8em; 
+    
     }
 
 `;
@@ -59,6 +74,14 @@ export const Profile = styled.div`
             }
         }
     }
+
+    @media only screen and (max-width: 850px) {
+        margin: 0;
+        img {
+           height: 40px;
+       }    
+        
+        }
 `;
 
 export const NavMenu = styled.div`
@@ -117,6 +140,18 @@ export const NavMenu = styled.div`
         }
         
     }
+
+    @media only screen and (max-width: 850px) {
+        margin-right: 10px;
+        ul {
+            flex-direction: column;
+        }
+
+        li {
+            margin: 0;
+        }
+         
+         }
     
 `;
 
@@ -124,11 +159,18 @@ export const Content = styled.main`
     max-width: 1120px;
     margin: 65px auto;
     display: flex;
+
+    @media only screen and (max-width: 850px) {
+        flex-direction: column;
+        align-items: center;
+        margin: 20px auto;
+
+    }
 `;
 
 export const Schedule = styled.div`
     flex: 1;
-    margin: 0 20px;
+    padding: 10px;
 
     h1 {
         font-size: 36px;
@@ -154,6 +196,14 @@ export const Schedule = styled.div`
             background: #8E515D;
             margin: 0 8px;
         }
+    }
+
+    @media only screen and (max-width: 850px) {
+        width: 360px;
+        max-height:360px;
+        overflow:auto;
+
+
     }
 `;
 
@@ -273,6 +323,11 @@ export const Section = styled.section`
 export const Calendar = styled.div`
     width: 380px;
     margin: 0 20px;
+
+    @media only screen and (max-width: 850px) {
+        min-width: 360px;
+        margin: 0;
+    }
 
     .DayPicker {
     border-radius: 10px;
