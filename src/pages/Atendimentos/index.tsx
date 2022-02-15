@@ -181,8 +181,10 @@ const Atendimentos: React.FC = () => {
                 
                 <Calendar>
                     <DayPicker
+                        showWeekNumbers
+                        onWeekClick={(week, days) => console.log(week, days)}
                         weekdaysShort={['D', 'S', 'T', 'Q', 'Q', 'S', 'S']}
-                        fromMonth={new Date()}
+                        toMonth={new Date()}
                         disabledDays={[{ daysOfWeek: [0, 6] }, ...disabledDays]}
                         modifiers={{
                             available: { daysOfWeek: [1, 2, 3, 4, 5] }

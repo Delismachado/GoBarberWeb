@@ -260,6 +260,8 @@ const Dashboard: React.FC = () => {
                 </Schedule>
                 <Calendar>
                     <DayPicker
+                        showWeekNumbers
+                        onWeekClick={(week, days) => console.log(week, days)}
                         weekdaysShort={['D', 'S', 'T', 'Q', 'Q', 'S', 'S']}
                         fromMonth={new Date()}
                         disabledDays={[{ daysOfWeek: [0, 6] }, ...disabledDays]}

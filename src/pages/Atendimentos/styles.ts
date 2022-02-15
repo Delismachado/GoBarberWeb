@@ -287,6 +287,7 @@ export const Calendar = styled.div`
   .DayPicker,
   .DayPicker-Month {
     width: 100%;
+    
   }
 
   .DayPicker-NavButton {
@@ -311,9 +312,9 @@ export const Calendar = styled.div`
 
   .DayPicker-Month {
     border-collapse: separate;
-    border-spacing: 8px;
+    border-spacing: 4px;
     margin: 16px 0 0 0;
-    padding: 16px;
+    padding: 16px 8px;
     background-color: #EBC0C8;
     border-radius: 0 0 10px 10px;
   }
@@ -361,4 +362,22 @@ export const Calendar = styled.div`
     border-radius: 10px;
     color: #DB8393 !important;
   }
+
+  .DayPicker-WeekNumber {
+      border: none;
+      color: white;
+      font-size: 1em;
+      background: #dc8393;
+      border-radius: 10px;
+      width: 40px;
+      height: 40px;
+      vertical-align: middle;
+      text-align: center;
+
+  }
+
+  .DayPicker-WeekNumber--selected {
+    color: black;
+
+}
 `;
