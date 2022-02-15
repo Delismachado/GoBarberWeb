@@ -48,7 +48,7 @@ interface CalendarModifiers extends DayModifiers {
 }
 
 
-const Dashboard: React.FC = () => {
+const Atendimentos: React.FC = () => {
 
     const { user, signOut } = useAuth();
     const [selectedDate, setSelectedDate] = useState(new Date());
@@ -154,7 +154,7 @@ const Dashboard: React.FC = () => {
 
                     <Profile>
                     <img src={logoImg} alt="Maniclub" />
-                    {/*<img
+                         {/*<img
                             src={user.avatar_url} alt={user.name} />  */}
 
                         <div>
@@ -164,23 +164,50 @@ const Dashboard: React.FC = () => {
                             </Link>
                         </div>
                     </Profile>
+
                     <NavMenu>
                         <ul className="navMenu">
                             <li><a href="/profile">Meu Perfil</a></li>
-                            <li><a href="/atendimentos">Atendimentos</a></li>
+                            <li><a href="/dashboard">Agendamentos</a></li>
                         </ul>
                         <button type="button" onClick={signOut} >
                         <FiPower />
                         </button>
                     </NavMenu>
-
-                    
                 </HeaderContent>
             </Header>
 
             <Content>
+                
+                <Calendar>
+                    <DayPicker
+                        weekdaysShort={['D', 'S', 'T', 'Q', 'Q', 'S', 'S']}
+                        fromMonth={new Date()}
+                        disabledDays={[{ daysOfWeek: [0, 6] }, ...disabledDays]}
+                        modifiers={{
+                            available: { daysOfWeek: [1, 2, 3, 4, 5] }
+                        }}
+                        onMonthChange={handleMonthChange}
+                        selectedDays={selectedDate}
+                        onDayClick={handleDateChange}
+                        months={[
+                            'Janeiro',
+                            'Fevereiro',
+                            'Março',
+                            'Abril',
+                            'Maio',
+                            'Junho',
+                            'Julho',
+                            'Agosto',
+                            'Setembro',
+                            'Outubro',
+                            'Novembro',
+                            'Dezembro',
+                        ]}
+                    />
+                </Calendar>
                 <Schedule>
-                    <h1>Agendamentos</h1>
+                    <h1>Atendimentos</h1>
                     <p>
                         {isToday(selectedDate) && <span>Hoje</span>}
                         <span>{selectedDateAsText}</span>
@@ -258,33 +285,6 @@ const Dashboard: React.FC = () => {
                         ))}
                     </Section>
                 </Schedule>
-                <Calendar>
-                    <DayPicker
-                        weekdaysShort={['D', 'S', 'T', 'Q', 'Q', 'S', 'S']}
-                        fromMonth={new Date()}
-                        disabledDays={[{ daysOfWeek: [0, 6] }, ...disabledDays]}
-                        modifiers={{
-                            available: { daysOfWeek: [1, 2, 3, 4, 5] }
-                        }}
-                        onMonthChange={handleMonthChange}
-                        selectedDays={selectedDate}
-                        onDayClick={handleDateChange}
-                        months={[
-                            'Janeiro',
-                            'Fevereiro',
-                            'Março',
-                            'Abril',
-                            'Maio',
-                            'Junho',
-                            'Julho',
-                            'Agosto',
-                            'Setembro',
-                            'Outubro',
-                            'Novembro',
-                            'Dezembro',
-                        ]}
-                    />
-                </Calendar>
             </Content>
             
         </Container>
@@ -294,4 +294,4 @@ const Dashboard: React.FC = () => {
 
 
 
-export default Dashboard;
+export default Atendimentos;

@@ -128,7 +128,7 @@ export const Content = styled.main`
 
 export const Schedule = styled.div`
     flex: 1;
-    margin-right: 120px;
+    margin: 0 20px;
 
     h1 {
         font-size: 36px;
@@ -257,6 +257,7 @@ export const Appointment = styled.div`
 
 export const Section = styled.section`
     margin-top: 48px;
+   
     > strong {
         color: #DE9EAE;
         font-size: 20px;
@@ -269,8 +270,9 @@ export const Section = styled.section`
 `;
 
 
-export const Calendar = styled.aside`
+export const Calendar = styled.div`
     width: 380px;
+    margin: 0 20px;
 
     .DayPicker {
     border-radius: 10px;
