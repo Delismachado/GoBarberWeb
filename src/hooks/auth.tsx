@@ -2,7 +2,6 @@
 import React, { createContext, useCallback, useState, useContext } from "react";
 import api from "../services/api";
 
-
 interface User {
     id: string;
     name: string;
@@ -68,14 +67,18 @@ export const AuthProvider: React.FC = ({ children }) => {
         (user: User) => {
             localStorage.setItem("@Gobarber:user", JSON.stringify(user));
 
-        setData({
-            token: data.token,
-            user,
-        });
-    }, [setData, data.token]);
+            setData({
+                token: data.token,
+                user,
+            });
+        },
+        [setData, data.token]
+    );
 
     return (
-        <AuthContext.Provider value={{ user: data.user, signIn, signOut, updateUser }}>
+        <AuthContext.Provider
+            value={{ user: data.user, signIn, signOut, updateUser }}
+        >
             {children}
         </AuthContext.Provider>
     );

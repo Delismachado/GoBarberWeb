@@ -53,17 +53,19 @@ const SignIn: React.FC = () => {
                 if (err instanceof Yup.ValidationError) {
                     const errors = getValidationErrors(err);
                     formRef.current?.setErrors(errors);
-                } else {
-                    console.log(err);
-
+                } else if (err.response.status === 402) {
+                    addToast({
+                        type: "error",
+                        title: "Erro na autenticação",
+                        description: "Usuário ou senha inválidos",
+                    });
                     return;
                 }
 
-
                 addToast({
                     type: "error",
-                    title: "erro na autenticação",
-                    description: "ocorreu um erro ao logar",
+                    title: "Erro na autenticação",
+                    description: "Ocorreu um erro ao logar",
                 });
             }
         },
@@ -73,7 +75,7 @@ const SignIn: React.FC = () => {
         <Container>
             <Content>
                 <AnimationContainer>
-                    <img src={logoImg} alt="Maniclub"/>
+                    <img src={logoImg} alt="Maniclub" />
                     <Form ref={formRef} onSubmit={handleSubmit}>
                         <h1>Faça seu login, amor!</h1>
 
