@@ -27,7 +27,6 @@ const ForgotPassword: React.FC = () => {
 
     const formRef = useRef<FormHandles>(null);
     const { addToast } = useToast();
-    //const history = useHistory();
     const handleSubmit = useCallback(
         async (data: ForgotPasswordForData) => {
             try {
@@ -37,28 +36,26 @@ const ForgotPassword: React.FC = () => {
                 const schema = Yup.object().shape({
                     email: Yup.string()
                         .required("E-mail válido obrigatório")
-                        .email("Digite um email válido")
+                        .email("Digite um email válido"),
                 });
 
                 await schema.validate(data, {
                     abortEarly: false,
                 });
 
-                //recuperação de senha
-               await api.post('/password/forgot', {
-                    email:data.email,
+                // recuperação de senha
+                await api.post("/password/forgot", {
+                    email: data.email,
                 });
 
                 addToast({
-                    type:'success',
-                    title: 'E-mail de recuperaçãod e senha enviado.',
-                    description:'Enviamos um e-mail para confirmar a recuperação de senha.'
+                    type: "success",
+                    title: "E-mail de recuperaçãod e senha enviado.",
+                    description:
+                        "Enviamos um e-mail para confirmar a recuperação de senha.",
                 });
 
                 return;
-
-
-                // history.push("/dashboard");
             } catch (err) {
                 if (err instanceof Yup.ValidationError) {
                     const errors = getValidationErrors(err);
@@ -71,9 +68,9 @@ const ForgotPassword: React.FC = () => {
                 addToast({
                     type: "error",
                     title: "erro na recuperação de senha",
-                    description: "ocorreu um erro ao recuperar a senha, tente novamente",
+                    description:
+                        "ocorreu um erro ao recuperar a senha, tente novamente",
                 });
-
             } finally {
                 setLoading(false);
             }
@@ -94,8 +91,9 @@ const ForgotPassword: React.FC = () => {
                             placeholder="E-mail"
                         />
 
-                        <Button loading={loading} type="submit">Recuperar</Button>
-
+                        <Button loading={loading} type="submit">
+                            Recuperar
+                        </Button>
                     </Form>
                     <Link to="/">
                         <FiLogIn />

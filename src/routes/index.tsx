@@ -1,7 +1,7 @@
 import React from "react";
-import { Switch } from "react-router-dom";
 
-import Route from "./Route";
+import { Route, Routes as ReactRoutes, useParams } from "react-router-dom";
+import RequireLogin from "./RequireLogin";
 
 import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
@@ -9,17 +9,39 @@ import Profile from "../pages/Profile";
 import Dashboard from "../pages/Dashboard";
 import ForgotPassword from "../pages/ForgotPassword";
 import ResetPassword from "../pages/ResetPassword";
+import NewAppointment from "../pages/NewAppointment";
 
 const Routes: React.FC = () => (
-    <Switch>
-        <Route path="/" exact component={SignIn} />
-        <Route path="/signup" component={SignUp} />
-        <Route path="/forgot-password" component={ForgotPassword} />
-        <Route path="/reset-password" component={ResetPassword} />
-
-        <Route path="/dashboard" component={Dashboard} isPrivate />
-        <Route path="/profile" component={Profile} isPrivate />
-    </Switch>
+    <ReactRoutes>
+        <Route path="/" exact element={<SignIn />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route
+            path="/dashboard"
+            element={
+                <RequireLogin>
+                    <Dashboard />
+                </RequireLogin>
+            }
+        />
+        <Route
+            path="/appointments/new"
+            element={
+                <RequireLogin>
+                    <NewAppointment />
+                </RequireLogin>
+            }
+        />
+        <Route
+            path="/profile"
+            element={
+                <RequireLogin>
+                    <Profile />
+                </RequireLogin>
+            }
+        />
+    </ReactRoutes>
 );
 
 export default Routes;

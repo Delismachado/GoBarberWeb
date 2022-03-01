@@ -3,11 +3,10 @@ import { FiUser, FiLock, FiMail, FiCamera, FiArrowLeft } from "react-icons/fi";
 import { FormHandles } from "@unform/core";
 import { Form } from "@unform/web";
 import * as Yup from "yup";
-import { useHistory, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import api from "../../services/api";
 import { useToast } from "../../hooks/toast";
 import getValidationErrors from "../../utils/getValidationErrors";
-
 
 import Input from "../../components/Inputs";
 import Button from "../../components/Button";
@@ -21,93 +20,95 @@ interface ProfileFormData {
     old_password: string;
     password: string;
     password_confirmation: string;
-
 }
 
 const Profile: React.FC = () => {
     const formRef = useRef<FormHandles>(null);
     const { addToast } = useToast();
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const { user, updateUser } = useAuth();
 
-    const handleSubmit = useCallback(async (data: ProfileFormData) => {
-        try {
-            formRef.current?.setErrors({});
+    const handleSubmit = useCallback(
+        async (data: ProfileFormData) => {
+            try {
+                formRef.current?.setErrors({});
 
-
-            const schema = Yup.object().shape({
-                name: Yup.string().required("Nome é obrigatório"),
-                email: Yup.string()
-                    .required("E-mail obrigatório")
-                    .email("Digite um e-mail válido"),
-                old_password: Yup.string(),
-                password: Yup.string().when('old_password', {
-                    is: val => !!val.length,
-                    then: Yup.string().required('Campo obrigatório'),
-                    otherwise: Yup.string(),
-                }),
-                password_confirmation: Yup.string()
-                    .when('old_password', {
-                        is: val => !!val.length,
-                        then: Yup.string().required('Campo obrigatório'),
+                const schema = Yup.object().shape({
+                    name: Yup.string().required("Nome é obrigatório"),
+                    email: Yup.string()
+                        .required("E-mail obrigatório")
+                        .email("Digite um e-mail válido"),
+                    old_password: Yup.string(),
+                    password: Yup.string().when("old_password", {
+                        is: (val) => !!val.length,
+                        then: Yup.string().required("Campo obrigatório"),
                         otherwise: Yup.string(),
-                    })
-                    .oneOf(
-                        [Yup.ref('password'), undefined],
-                        'confirmação incorreta',
-                    ),
-            });
+                    }),
+                    password_confirmation: Yup.string()
+                        .when("old_password", {
+                            is: (val) => !!val.length,
+                            then: Yup.string().required("Campo obrigatório"),
+                            otherwise: Yup.string(),
+                        })
+                        .oneOf(
+                            [Yup.ref("password"), undefined],
+                            "confirmação incorreta"
+                        ),
+                });
 
+                await schema.validate(data, {
+                    abortEarly: false,
+                });
 
+                const {
+                    name,
+                    email,
+                    old_password,
+                    password,
+                    password_confirmation,
+                } = data;
 
-            await schema.validate(data, {
-                abortEarly: false,
-            });
+                const formData = {
+                    name,
+                    email,
+                    ...(old_password
+                        ? {
+                              old_password,
+                              password,
+                              password_confirmation,
+                          }
+                        : {}),
+                };
 
+                const response = await api.put("/profile", formData);
 
-            const { name, email, old_password, password, password_confirmation } = data;
+                updateUser(response.data);
 
-            const formData = {
-                name,
-                email,
-                ...(old_password
-                    ? {
-                        old_password,
-                        password,
-                        password_confirmation,
-                      }
-                    : {}),
-            };
+                navigate("/dashboard");
 
-            const response = await api.put("/profile", formData);
+                addToast({
+                    type: "success",
+                    title: "Perfil atualizado!",
+                    description: "Suas infs foram salvas!",
+                });
+            } catch (err) {
+                if (err instanceof Yup.ValidationError) {
+                    const errors = getValidationErrors(err);
+                    formRef.current?.setErrors(errors);
+                } else {
+                    console.log(err);
+                    return;
+                }
 
-            updateUser(response.data);
-
-            history.push("/dashboard");
-
-            addToast({
-                type: "success",
-                title: "Perfil atualizado!",
-                description: "Suas infs foram salvas!",
-            });
-        } catch (err) {
-            if (err instanceof Yup.ValidationError) {
-                const errors = getValidationErrors(err);
-                formRef.current?.setErrors(errors);
-            } else {
-                console.log(err);
-                return;
+                addToast({
+                    type: "error",
+                    title: "erro na atualização",
+                    description: "ocorreu um erro ao atualizar as infs",
+                });
             }
-
-            addToast({
-                type: "error",
-                title: "erro na atualização",
-                description: "ocorreu um erro ao atualizar as infs",
-            });
-        }
-    },
-        [addToast, history, updateUser]
+        },
+        [addToast, navigate, updateUser]
     );
 
     const hadleAvatarChange = useCallback(
@@ -115,18 +116,20 @@ const Profile: React.FC = () => {
             if (e.target.files) {
                 const data = new FormData();
 
-                data.append('avatar', e.target.files[0]);
+                data.append("avatar", e.target.files[0]);
 
-                api.patch('/users/avatar', data).then((response) => {
+                api.patch("/users/avatar", data).then((response) => {
                     updateUser(response.data);
 
                     addToast({
-                        type: 'success',
-                        title: 'Avatar atualizado com sucesso!'
+                        type: "success",
+                        title: "Avatar atualizado com sucesso!",
                     });
                 });
             }
-        }, [addToast, updateUser]);
+        },
+        [addToast, updateUser]
+    );
 
     return (
         <Container>
@@ -138,16 +141,22 @@ const Profile: React.FC = () => {
                 </div>
             </header>
             <Content>
-                <Form ref={formRef} initialData={{ name: user.name, email: user.email }} onSubmit={handleSubmit}>
+                <Form
+                    ref={formRef}
+                    initialData={{ name: user.name, email: user.email }}
+                    onSubmit={handleSubmit}
+                >
                     <AvatarInput>
                         <img src={user.avatar_url} alt={user.name} />
 
-                        <label htmlFor="avatar" >
+                        <label htmlFor="avatar">
                             <FiCamera />
-                            <input type="file" id="avatar" onChange={hadleAvatarChange} />
+                            <input
+                                type="file"
+                                id="avatar"
+                                onChange={hadleAvatarChange}
+                            />
                         </label>
-
-
                     </AvatarInput>
 
                     <h1>Meu perfil</h1>
@@ -178,7 +187,6 @@ const Profile: React.FC = () => {
 
                     <Button type="submit">Confirmar alterações</Button>
                 </Form>
-
             </Content>
         </Container>
     );

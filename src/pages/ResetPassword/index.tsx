@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useCallback, useRef } from "react";
-import {FiLock } from "react-icons/fi";
+import { FiLock } from "react-icons/fi";
 import { Form } from "@unform/web";
 import { FormHandles } from "@unform/core";
 import * as Yup from "yup";
-import { useHistory, useLocation } from "react-router-dom";
-
+import { useNavigate, useLocation } from "react-router-dom";
 
 import { useToast } from "../../hooks/toast";
 
@@ -27,7 +26,7 @@ interface ResetPasswordFormData {
 const ResetPassword: React.FC = () => {
     const formRef = useRef<FormHandles>(null);
     const { addToast } = useToast();
-    const history = useHistory();
+    const navigate = useNavigate();
     const location = useLocation();
     const handleSubmit = useCallback(
         async (data: ResetPasswordFormData) => {
@@ -37,32 +36,29 @@ const ResetPassword: React.FC = () => {
                 const schema = Yup.object().shape({
                     password: Yup.string().required("Senha obrigatória"),
                     password_confirmation: Yup.string().oneOf(
-                        [Yup.ref('password'), undefined],
-                        'Confirmação incorreta',
+                        [Yup.ref("password"), undefined],
+                        "Confirmação incorreta"
                     ),
-
                 });
 
                 await schema.validate(data, {
                     abortEarly: false,
                 });
 
-                const { password, password_confirmation} = data;
-                const token = location.search.replace('?token', '');
+                const { password, password_confirmation } = data;
+                const token = location.search.replace("?token", "");
 
                 if (!token) {
-
                     throw new Error();
                 }
 
-                await api.post('/password/reset', {
+                await api.post("/password/reset", {
                     password,
                     password_confirmation,
                     token,
                 });
 
-                history.push("/");
-
+                navigate("/");
             } catch (err) {
                 if (err instanceof Yup.ValidationError) {
                     const errors = getValidationErrors(err);
@@ -73,11 +69,12 @@ const ResetPassword: React.FC = () => {
                 addToast({
                     type: "error",
                     title: "erro ao resetar senha",
-                    description: "ocorreu um erro ao resetar a senha tente novamente.",
+                    description:
+                        "ocorreu um erro ao resetar a senha tente novamente.",
                 });
             }
         },
-        [addToast, history, location.search]
+        [addToast, navigate, location.search]
     );
     return (
         <Container>
@@ -102,7 +99,6 @@ const ResetPassword: React.FC = () => {
                         />
 
                         <Button type="submit">Alterar senha</Button>
-
                     </Form>
                 </AnimationContainer>
             </Content>
